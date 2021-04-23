@@ -295,6 +295,7 @@ def Reset():
         file = open("2.txt", "w")
         file.write("0")
         file.close()
+        os.remove("ky.key")
         logout()
 def isValidPassword(x):
     UpperCheck = "False"

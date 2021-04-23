@@ -3,7 +3,6 @@ import bcrypt
 import codecs
 from cryptography.fernet import Fernet
 
-
 def main():
     print("\n--- Main Menu ---\n")
     print("1. New\n2. Open\n3. Delete Note\n4. Reset Password\n5. Search\n6. Exit\n0. Reset All\n\n\n* 'exit()' to save and exit")
@@ -80,22 +79,30 @@ def main():
             elif define == "0":
                 Reset()
                 break
+
 def Newfile():
     print("---- New File ----\n")
     FileName = input("""File Name (type "exit()" to return to main menu): """)
-    if FileName == "exit()":
-        main()
-    FileName = FileName + ".txt"
-    Check = Checkfile(FileName)
-    if Check == False:
-        print("Your file name is unavailable, please choose other name.\n\n")
+    if "\\" in FileName or "/" in FileName or ":" in FileName or "*" in FileName or "?" in FileName or '"' in FileName or "<" in FileName or ">" in FileName or "|" in FileName:
+        print('File name cannot contain these characters: \\ / : * ? " < > |')
+        input("Press Enter to retry\n")
         Newfile()
-    if Check == True:
-        File = open("FileNameProgrammeApplication.txt","a")
-        File.writelines(FileName + "\n")
-        File.close()
-        print("\n\t\t"+ FileName.replace(".txt","") + "\n")
-        writinglines(FileName)
+        
+    else:
+        if FileName == "exit()":
+            main()
+        FileName = FileName + ".txt"
+        Check = Checkfile(FileName)
+        if Check == False:
+            print("Your file name is unavailable, please choose other name.\n\n")
+            Newfile()
+        if Check == True:
+            File = open("FileNameProgrammeApplication.txt","a")
+            File.writelines(FileName + "\n")
+            File.close()
+            print("\n\t\t"+ FileName.replace(".txt","") + "\n")
+            writinglines(FileName)
+
 def Openfile():
     print("\n---- Open ----\n")
     linecount = printList()
@@ -121,6 +128,7 @@ def Openfile():
             Openfile()
         if Check == False:
             readlines(FileName)
+
 def Checkfile(x):
     File = open("FileNameProgrammeApplication.txt", "r")
     x = x + "\n"
@@ -132,6 +140,7 @@ def Checkfile(x):
             return False
     File.close()
     return True
+
 def writinglines(FileName):
     key = Fernet(open("ky.key","rb").read())
     File = open(FileName, "a")
@@ -144,6 +153,7 @@ def writinglines(FileName):
         NewLine = NewLine.encode()
         NewLine = key.encrypt(NewLine)
         File.writelines(str(NewLine).replace("b'","").replace("'","") + "\n")
+
 def readlines(FileName):
     key = Fernet(open("ky.key","rb").read())
     File = open(FileName, "r")
@@ -155,6 +165,7 @@ def readlines(FileName):
         print(line.replace("\n",""))
     File.close()
     writinglines(FileName)
+
 def password():
     file = open("2.txt", "r")
     line = file.readline()
@@ -205,6 +216,7 @@ def password():
             return True
         else:
             return False
+
 def DeleteFile():
     print("\n --- Delete Note ---\n")
     linecount = printList()
@@ -236,6 +248,7 @@ def DeleteFile():
     else:
         print("\nPlease try again")
         DeleteFile()
+
 def printList():
     File = open("FileNameProgrammeApplication.txt", "r")
     linecount = 0
@@ -281,6 +294,7 @@ def Search():
                 main()
         if Check == False:
             readlines(Choose + ".txt")
+
 def Reset():
     Choose = input("Are You Sure?\n(y/n): ")
     if Choose.lower() == "y":
@@ -297,6 +311,7 @@ def Reset():
         file.close()
         os.remove("ky.key")
         logout()
+
 def isValidPassword(x):
     UpperCheck = "False"
     LowerCheck = "False"
@@ -330,6 +345,7 @@ def isValidPassword(x):
         return True
     else:
         return False
+
 def logout():
     print("\n\t-- Secure Note --\b\n")
     passwordcheck = False

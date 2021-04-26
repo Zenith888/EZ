@@ -51,9 +51,8 @@ def main():
                 Reset()
                 break
         else:
+            print()
             define = input("Please Input a valid number (1, 2, 3, 4, 5, 6, 0): ")
-            if Try == 1:
-            define = input(": ")
             if define == "1":
                 print()
                 Newfile()
@@ -324,7 +323,7 @@ def Reset():
         file.close()
         os.remove("ky.key")
         logout()
-    elif Chose.lower() == "n":
+    elif Choose.lower() == "n":
         input("Press 'Enter' to return to Main Menu")
         main()
     else:

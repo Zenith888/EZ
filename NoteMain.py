@@ -46,7 +46,6 @@ def main():
                 break
         else:
             define = input("Please Input a valid number (1, 2, 3, 4, 5, 6, 0): ")
-            print(define)
             if define == "1":
                 Newfile()
                 break

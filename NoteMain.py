@@ -327,6 +327,7 @@ def Reset():
         input("Press 'Enter' to return to Main Menu")
         main()
     else:
+        print()
         Reset()
 
 def isValidPassword(x):

@@ -44,7 +44,7 @@ def main():
                 file.close()
                 print("PASSWORD RESET. Restart to enter new password\nPress 'Enter' to exit")
                 input()
-                main()
+                logout()
 
             elif define == "5":
                 print()
@@ -92,7 +92,7 @@ def main():
                 file.close()
                 print("PASSWORD RESET. Restart to enter new password\nPress 'Enter' to exit")
                 input()
-                main()
+                logout()
 
             elif define == "5":
                 print()

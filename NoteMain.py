@@ -203,7 +203,7 @@ def password():
             exit()
         check = isValidPassword(password)
         while check == False:
-            password = input("Set Password (1 Uppercase, 1 Lowercase, 1 Number, 1 Symbol, 10 letters in total: )")
+            password = input("Set Password (1 Uppercase, 1 Lowercase, 1 Number, 1 Symbol, 10 letters in total): ")
             check = isValidPassword(password)
         if check == True:
             password = password.encode("utf-8")

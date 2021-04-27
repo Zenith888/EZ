@@ -44,7 +44,7 @@ def main():
                 file.close()
                 print("PASSWORD RESET. Restart to enter new password\nPress 'Enter' to exit")
                 input()
-                exit()
+                main()
 
             elif define == "5":
                 print()
@@ -77,15 +77,22 @@ def main():
 
             elif define == "4":
                 print()
+                password = input("New Password: ")
+                password = password.encode("utf-8")
+                File = open("1.txt","r")
+                current_password = File.readline().encode("utf-8")
+                File.close()
+                while bcrypt.checkpw(password, current_password) == True:
+                        password = input("New Password(can't be the same is previous): ").encode("utf-8")
+                salt = bcrypt.gensalt()
+                Hash = bcrypt.hashpw(password, salt)
+                Hash = codecs.decode(Hash,"utf-8")
                 file = open("1.txt","w")
-                file.writelines("")
-                file.close()
-                file = open("2.txt", "w")
-                file.writelines("0")
+                file.writelines(Hash)
                 file.close()
                 print("PASSWORD RESET. Restart to enter new password\nPress 'Enter' to exit")
                 input()
-                exit()
+                main()
 
             elif define == "5":
                 print()
@@ -186,7 +193,7 @@ def readlines(FileName):
     writinglines(FileName)
 
 def password():
-    file = open("2.txt", "r")
+    file = open('2.txt',"r")
     line = file.readline()
     if int(line) < 1 or line == "" or line == " ":
         file.close()            

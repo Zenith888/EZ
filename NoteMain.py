@@ -13,18 +13,22 @@ def main():
         if Try == 1:
             define = input(": ")
             if define == "1":
+                print()
                 Newfile()
                 break
             
             elif define == "2":
+                print()
                 Openfile()
                 break
             
             elif define == "3":
+                print()
                 DeleteFile()
                 break
 
             elif define == "4":
+                print()
                 file = open("1.txt","w")
                 file.writelines("")
                 file.close()
@@ -36,30 +40,36 @@ def main():
                 exit()
 
             elif define == "5":
+                print()
                 Search()
                 break
 
             elif define == "6" or define == "exit()":
                 exit()
             elif define == "0":
+                print()
                 Reset()
                 break
         else:
+            print()
             define = input("Please Input a valid number (1, 2, 3, 4, 5, 6, 0): ")
-            print(define)
             if define == "1":
+                print()
                 Newfile()
                 break
             
             elif define == "2":
+                print()
                 Openfile()
                 break
             
             elif define == "3":
+                print()
                 DeleteFile()
                 break
 
             elif define == "4":
+                print()
                 file = open("1.txt","w")
                 file.writelines("")
                 file.close()
@@ -71,12 +81,14 @@ def main():
                 exit()
 
             elif define == "5":
+                print()
                 Search()
                 break
 
             elif define == "6" or define == "exit()":
                 exit()
             elif define == "0":
+                print()
                 Reset()
                 break
 
@@ -311,6 +323,12 @@ def Reset():
         file.close()
         os.remove("ky.key")
         logout()
+    elif Choose.lower() == "n":
+        input("Press 'Enter' to return to Main Menu")
+        main()
+    else:
+        print()
+        Reset()
 
 def isValidPassword(x):
     UpperCheck = "False"

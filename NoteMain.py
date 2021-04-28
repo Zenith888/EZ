@@ -203,7 +203,7 @@ def password():
             exit()
         check = isValidPassword(password)
         while check == False:
-            password = input("Set Password (1 Uppercase, 1 Lowercase, 1 Number, 1 Symbol, 10 letters in total: )")
+            password = input("Set Password (1 Uppercase, 1 Lowercase, 1 Number, 1 Symbol, 10 letters in total): ")
             check = isValidPassword(password)
         if check == True:
             password = password.encode("utf-8")
@@ -295,19 +295,23 @@ def Search():
         for line in file:
             FileList.append(line.replace("\n", ""))
         file.close()
+        key = Fernet(open("ky.key","rb").read())
         for variable in FileList:
             file = open(variable, "r")
             Available = False
             for line in file:
+                line = line.encode()
+                line = key.decrypt(line)
+                line = str(line).replace("b'","").replace("'","")
                 if Search in line:
                     Available = True
-                    print("\nTitle: " + variable.replace(".txt","") + "\n" + line + "________________________________")
+                    print("\nTitle: " + variable.replace(".txt","") + "\n" + line + "\n________________________________")
             file.close()
-            if Available == True:    
-                Choose = input("\nInput note name to open note\nor press 'Enter' to return to main menu\nInput: ")
-            else:
-                input("No file found, returning to main menu")
-                main()
+        if Available == True:    
+            Choose = input("\nInput note name to open note\nor press 'Enter' to return to main menu\nInput: ")
+        else:
+            input("No file found, returning to main menu")
+            main()
         if Choose.isspace() or Choose == "":
             print()
             main()
@@ -315,7 +319,7 @@ def Search():
         while Check == True:
             Choose = input("\nNo note found, Please enter a valid note name\nor press 'Enter' to return to main menu: ")
             Check = Checkfile(Choose + '.txt')
-            if Choose .isspace() or Choose == "":
+            if Choose.isspace() or Choose == "":
                 print()
                 main()
         if Check == False:

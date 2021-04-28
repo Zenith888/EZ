@@ -83,7 +83,7 @@ def main():
                 current_password = File.readline().encode("utf-8")
                 File.close()
                 while bcrypt.checkpw(password, current_password) == True:
-                        password = input("New Password(can't be the same is previous): ").encode("utf-8")
+                        password = input("New Password(can't be the same as previous): ").encode("utf-8")
                 salt = bcrypt.gensalt()
                 Hash = bcrypt.hashpw(password, salt)
                 Hash = codecs.decode(Hash,"utf-8")

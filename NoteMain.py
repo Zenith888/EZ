@@ -287,7 +287,7 @@ def printList():
 
 def Search():
     Search = input("Search(Press enter to return to main menu): ")
-    if Search.isspace() or Search == " ":
+    if Search.isspace() or Search == "":
         main()
     else:
         file = open("FileNameProgrammeApplication.txt", "r")
